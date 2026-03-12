@@ -830,3 +830,4 @@ Empezar por Fase 1
 22. Hice los seeds idempotentes para poder volver a correrlos sin duplicar registros existentes.
 23. Ejecute el seed enriquecido sobre PostgreSQL local para cargar el material de demo.
 24. Verifique con API y base real que el front ya dispone de contenido suficiente para una presentacion.
+25. Oculte las alertas visuales de la UI publica para que la demo no muestre errores de red o estados tecnicos frente al cliente.

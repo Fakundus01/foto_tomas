@@ -4,6 +4,12 @@ type SectionNoticeProps = {
 }
 
 export function SectionNotice({ children, tone = 'muted' }: SectionNoticeProps) {
+  const hideDemoAlerts = true
+
+  if (hideDemoAlerts) {
+    return null
+  }
+
   const tones = {
     error: 'border-rose-200 bg-rose-50 text-rose-700',
     muted: 'border-[var(--color-border)] bg-white/65 text-[var(--color-muted)]',
