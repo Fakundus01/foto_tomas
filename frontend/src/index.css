@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  color: #201913;
+  color: #181614;
   background:
-    radial-gradient(circle at top, rgba(176, 126, 90, 0.22), transparent 28%),
-    radial-gradient(circle at 80% 10%, rgba(87, 114, 134, 0.18), transparent 24%),
-    linear-gradient(180deg, #fff9f3 0%, #f4ecdf 100%);
+    radial-gradient(circle at 50% 10%, rgba(28, 31, 37, 0.82), transparent 30%),
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.78), transparent 24%),
+    radial-gradient(circle at 85% 8%, rgba(249, 212, 94, 0.18), transparent 16%),
+    linear-gradient(180deg, #d7d7d7 0%, #55585f 20%, #1b1d21 44%, #676c73 76%, #dfdfdf 100%);
   font-family: 'Manrope', sans-serif;
   font-synthesis: none;
   line-height: 1.5;
@@ -13,13 +14,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --color-ink: #201913;
-  --color-muted: #6a5b4c;
-  --color-accent: #8e5a3f;
-  --color-accent-strong: #6f4028;
-  --color-surface: rgba(255, 250, 244, 0.8);
-  --color-border: rgba(94, 74, 56, 0.12);
-  --shadow-soft: 0 20px 60px rgba(52, 34, 21, 0.12);
+  --color-ink: #141414;
+  --color-muted: #504d48;
+  --color-accent: #d6ab2f;
+  --color-accent-strong: #9a761a;
+  --color-surface: rgba(255, 255, 255, 0.78);
+  --color-surface-dark: rgba(14, 16, 20, 0.84);
+  --color-border: rgba(20, 20, 20, 0.12);
+  --color-border-strong: rgba(255, 214, 97, 0.24);
+  --shadow-soft: 0 24px 80px rgba(0, 0, 0, 0.22);
 }
 
 * {
@@ -76,5 +79,19 @@ textarea {
     border: 1px solid var(--color-border);
     box-shadow: var(--shadow-soft);
     backdrop-filter: blur(18px);
+  }
+
+  .brand-panel {
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
+      linear-gradient(180deg, rgba(19, 21, 26, 0.96), rgba(8, 10, 14, 0.92));
+    border: 1px solid var(--color-border-strong);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.48);
+    backdrop-filter: blur(18px);
+  }
+
+  .metal-line {
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.08));
   }
 }
