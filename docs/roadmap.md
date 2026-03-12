@@ -826,3 +826,7 @@ Empezar por Fase 1
 18. Conecte home, catalogo, agenda, footer y reservas a la API usando hooks/fetchers separados.
 19. Cambie el formulario de reservas para crear leads y pedidos reales contra `bookings/quote-request`.
 20. Agregue tests para contenido publico, settings y flujo de reserva, y los deje pasando.
+21. Enriquezca los seeds con data mock de presentacion: 9 packs, 7 items de galeria, 5 testimonios, 5 FAQs y 12 slots de agenda.
+22. Hice los seeds idempotentes para poder volver a correrlos sin duplicar registros existentes.
+23. Ejecute el seed enriquecido sobre PostgreSQL local para cargar el material de demo.
+24. Verifique con API y base real que el front ya dispone de contenido suficiente para una presentacion.
