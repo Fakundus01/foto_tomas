@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  color: #201913;
+  background:
+    radial-gradient(circle at top, rgba(176, 126, 90, 0.22), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(87, 114, 134, 0.18), transparent 24%),
+    linear-gradient(180deg, #fff9f3 0%, #f4ecdf 100%);
+  font-family: 'Manrope', sans-serif;
+  font-synthesis: none;
+  line-height: 1.5;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --color-ink: #201913;
+  --color-muted: #6a5b4c;
+  --color-accent: #8e5a3f;
+  --color-accent-strong: #6f4028;
+  --color-surface: rgba(255, 250, 244, 0.8);
+  --color-border: rgba(94, 74, 56, 0.12);
+  --shadow-soft: 0 20px 60px rgba(52, 34, 21, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  color: var(--color-ink);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer base {
+  body {
+    @apply min-h-screen bg-transparent;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .glass-panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(18px);
+  }
+}
