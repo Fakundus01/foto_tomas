@@ -1,14 +1,20 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import type { QuoteRequestResponse } from '@/entities/booking/types'
+import { createQuoteRequest } from '@/features/booking/api/createQuoteRequest'
+import { TextField, TextareaField } from '@/features/booking/components/TextField'
 import { servicePacks } from '@/features/catalog/model/packs'
 import { BookingPayloadMapper } from '@/features/booking/model/BookingPayloadMapper'
-import { TextField, TextareaField } from '@/features/booking/components/TextField'
 import { bookingFormSchema, type BookingFormInput, type BookingFormValues } from '@/features/booking/model/bookingSchema'
+import { useCatalogPacks } from '@/features/catalog/hooks/useCatalogPacks'
 import { Button } from '@/shared/ui/Button'
+import { SectionNotice } from '@/shared/ui/SectionNotice'
 
 export function BookingForm() {
-  const [submittedPayload, setSubmittedPayload] = useState<string>('')
+  const { data: packs } = useCatalogPacks()
+  const [requestError, setRequestError] = useState<string | null>(null)
+  const [requestSuccess, setRequestSuccess] = useState<QuoteRequestResponse | null>(null)
   const {
     formState: { errors, isSubmitting },
     handleSubmit,
@@ -23,10 +29,17 @@ export function BookingForm() {
 
   const onSubmit = async (values: BookingFormValues) => {
     const payload = BookingPayloadMapper.toApiPayload(values)
+    setRequestError(null)
+    setRequestSuccess(null)
 
-    await new Promise((resolve) => window.setTimeout(resolve, 300))
-    setSubmittedPayload(JSON.stringify(payload, null, 2))
-    reset({ eventType: values.eventType, consent: true })
+    try {
+      const response = await createQuoteRequest(payload)
+      setRequestSuccess(response)
+      reset({ eventType: values.eventType, consent: true })
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'No se pudo enviar la consulta.'
+      setRequestError(message)
+    }
   }
 
   return (
@@ -37,7 +50,7 @@ export function BookingForm() {
           <h2 className="mt-3 text-4xl font-semibold">Reserva o pedi una reunion</h2>
         </div>
         <p className="max-w-md text-sm leading-7 text-[var(--color-muted)]">
-          El formulario ya queda listo para mapearse al backend y soportar modo invitado.
+          El formulario ahora crea lead y pedido de reserva reales usando el backend.
         </p>
       </div>
 
@@ -65,7 +78,7 @@ export function BookingForm() {
           Pack de interes
           <select className="mt-2 w-full rounded-3xl border border-[var(--color-border)] bg-white/80 px-4 py-3 text-sm" {...register('packInterest')}>
             <option value="">Elegi un pack</option>
-            {servicePacks.map((pack) => (
+            {(packs ?? servicePacks).map((pack) => (
               <option key={pack.id} value={pack.title}>
                 {pack.title}
               </option>
@@ -92,15 +105,20 @@ export function BookingForm() {
         </label>
 
         <div className="md:col-span-2 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <p className="text-sm text-[var(--color-muted)]">Despues este flujo puede conectarse a leads, citas o reservas con seña.</p>
+          <p className="text-sm text-[var(--color-muted)]">Despues este flujo puede evolucionar a citas, pagos de seña e historial del cliente.</p>
           <Button type="submit">{isSubmitting ? 'Enviando...' : 'Enviar consulta'}</Button>
         </div>
       </form>
 
-      {submittedPayload ? (
-        <div className="mt-6 rounded-[1.75rem] bg-[#1f1c1a] p-5 text-xs text-white">
-          <p className="mb-3 font-semibold uppercase tracking-[0.25em] text-white/70">Payload listo para backend</p>
-          <pre className="overflow-x-auto">{submittedPayload}</pre>
+      {requestError ? <div className="mt-6"><SectionNotice tone="error">{requestError}</SectionNotice></div> : null}
+
+      {requestSuccess ? (
+        <div className="mt-6 rounded-[1.75rem] bg-[#1f1c1a] p-5 text-sm text-white">
+          <p className="mb-3 font-semibold uppercase tracking-[0.25em] text-white/70">Consulta registrada</p>
+          <p>Reserva: {requestSuccess.bookingId}</p>
+          <p>Lead: {requestSuccess.leadId}</p>
+          <p>Estado: {requestSuccess.status}</p>
+          <p className="mt-3 text-white/70">Token invitado: {requestSuccess.guestCheckoutToken}</p>
         </div>
       ) : null}
     </section>

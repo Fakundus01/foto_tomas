@@ -821,3 +821,8 @@ Empezar por Fase 1
 13. Cargue seeds iniciales separados por dominio.
 14. Verifique frontend con `npm run build` y backend con test client + consultas reales a PostgreSQL.
 15. Actualice la documentacion con guia simple de arranque y resumen de arquitectura.
+16. Integre el logo real en `frontend/public/imgs/logo-f7v.png` y lo conecte a la UI publica/favicon.
+17. Agregue el endpoint `GET /api/v1/content/home` para FAQ, testimonios y galeria reales.
+18. Conecte home, catalogo, agenda, footer y reservas a la API usando hooks/fetchers separados.
+19. Cambie el formulario de reservas para crear leads y pedidos reales contra `bookings/quote-request`.
+20. Agregue tests para contenido publico, settings y flujo de reserva, y los deje pasando.

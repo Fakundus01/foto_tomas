@@ -22,3 +22,10 @@ export interface BookingRequestPayload {
   comments: string
   contact_consent: boolean
 }
+
+export interface QuoteRequestResponse {
+  bookingId: string
+  leadId: string
+  status: string
+  guestCheckoutToken: string
+}

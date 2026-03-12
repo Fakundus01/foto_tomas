@@ -8,6 +8,8 @@ Base completa para una plataforma web de Foto Tomas Video orientada a eventos so
 - Backend Flask modular con app factory, blueprints, SQLAlchemy, Flask-Migrate, seeds y manejo global de errores.
 - Base de datos PostgreSQL `foto_tomas` creada localmente.
 - Migracion inicial ejecutada y seed cargado.
+- Home publica conectada a datos reales del backend para FAQ, testimonios, galeria, settings, catalogo y agenda.
+- Formulario de reserva conectado al endpoint real de `bookings`.
 - Guia simple de arranque para que no tengas que adivinar nada.
 
 ## Estructura
@@ -169,6 +171,7 @@ python -m flask --app run.py seed
 - `GET /api/v1/auth/session`
 - `GET /api/v1/services/catalog`
 - `GET /api/v1/availability/slots`
+- `GET /api/v1/content/home`
 - `POST /api/v1/leads`
 - `POST /api/v1/bookings/quote-request`
 - `GET /api/v1/settings/public`

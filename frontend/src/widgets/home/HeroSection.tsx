@@ -1,9 +1,23 @@
 import { motion } from 'framer-motion'
+import type { HeroSetting } from '@/entities/site/types'
 import { Badge } from '@/shared/ui/Badge'
 import { BrandLockup } from '@/shared/ui/BrandLockup'
+import { BrandLogoImage } from '@/shared/ui/BrandLogoImage'
 import { Button } from '@/shared/ui/Button'
+import { SectionNotice } from '@/shared/ui/SectionNotice'
 
-export function HeroSection() {
+type HeroSectionProps = {
+  error?: string | null
+  hero?: HeroSetting
+  loading?: boolean
+}
+
+export function HeroSection({ error, hero, loading }: HeroSectionProps) {
+  const title = hero?.title ?? 'Foto y video para eventos que quieren verse tan bien como se sienten.'
+  const subtitle =
+    hero?.subtitle ??
+    'Cobertura premium para XV, bodas y eventos sociales con una identidad visual mas cinematica, sobria y dorada.'
+
   return (
     <section className="page-shell py-12 sm:py-16 lg:py-20">
       <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
@@ -15,12 +29,12 @@ export function HeroSection() {
         >
           <Badge>Plataforma comercial + reservas</Badge>
           <h1 className="max-w-4xl text-5xl font-semibold leading-none text-balance sm:text-6xl lg:text-7xl">
-            Una identidad mas cinematica, sobria y dorada para Foto Tomas Video.
+            {loading ? 'Cargando identidad de marca...' : title}
           </h1>
           <p className="max-w-2xl text-base leading-8 text-[var(--color-muted)] sm:text-lg">
-            Tome la referencia del logo para llevar la web a un lenguaje visual mas grafito, metalico y premium, sin
-            perder claridad comercial ni legibilidad.
+            {subtitle}
           </p>
+          {error ? <SectionNotice tone="error">{error}</SectionNotice> : null}
           <div className="flex flex-wrap gap-3">
             <Button href="/reservas">Reservar una cita</Button>
             <Button href="/servicios" variant="secondary">
@@ -60,6 +74,7 @@ export function HeroSection() {
                   Disponibilidad limitada
                 </span>
               </div>
+              <BrandLogoImage className="mx-auto h-44 w-full max-w-sm" />
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-accent)]">Sello visual</p>
                 <h2 className="mt-3 text-4xl font-semibold text-white">Grafito, contraste y un acento dorado que ordena la marca.</h2>
